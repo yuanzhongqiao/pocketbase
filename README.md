@@ -37,45 +37,7 @@
 </li>
 <li>
 <p dir="auto"><font style="vertical-align: inherit;"></font><code>main.go</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建一个新的项目目录，其中</font><font style="vertical-align: inherit;">包含以下文件：</font></font></p>
-<div class="highlight highlight-source-go notranslate position-relative overflow-auto" dir="auto"><pre><span class="pl-k">package</span> main
 
-<span class="pl-k">import</span> (
-    <span class="pl-s">"log"</span>
-    <span class="pl-s">"net/http"</span>
-
-    <span class="pl-s">"github.com/labstack/echo/v5"</span>
-    <span class="pl-s">"github.com/pocketbase/pocketbase"</span>
-    <span class="pl-s">"github.com/pocketbase/pocketbase/apis"</span>
-    <span class="pl-s">"github.com/pocketbase/pocketbase/core"</span>
-)
-
-<span class="pl-k">func</span> <span class="pl-en">main</span>() {
-    <span class="pl-s1">app</span> <span class="pl-c1">:=</span> <span class="pl-s1">pocketbase</span>.<span class="pl-en">New</span>()
-
-    <span class="pl-s1">app</span>.<span class="pl-en">OnBeforeServe</span>().<span class="pl-en">Add</span>(<span class="pl-k">func</span>(<span class="pl-s1">e</span> <span class="pl-c1">*</span>core.<span class="pl-smi">ServeEvent</span>) <span class="pl-smi">error</span> {
-        <span class="pl-c">// add new "GET /hello" route to the app router (echo)</span>
-        <span class="pl-s1">e</span>.<span class="pl-c1">Router</span>.<span class="pl-en">AddRoute</span>(echo.<span class="pl-smi">Route</span>{
-            <span class="pl-c1">Method</span>: <span class="pl-s1">http</span>.<span class="pl-c1">MethodGet</span>,
-            <span class="pl-c1">Path</span>:   <span class="pl-s">"/hello"</span>,
-            <span class="pl-c1">Handler</span>: <span class="pl-k">func</span>(<span class="pl-s1">c</span> echo.<span class="pl-smi">Context</span>) <span class="pl-smi">error</span> {
-                <span class="pl-k">return</span> <span class="pl-s1">c</span>.<span class="pl-en">String</span>(<span class="pl-c1">200</span>, <span class="pl-s">"Hello world!"</span>)
-            },
-            <span class="pl-c1">Middlewares</span>: []echo.<span class="pl-smi">MiddlewareFunc</span>{
-                <span class="pl-s1">apis</span>.<span class="pl-en">ActivityLogger</span>(<span class="pl-s1">app</span>),
-            },
-        })
-
-        <span class="pl-k">return</span> <span class="pl-c1">nil</span>
-    })
-
-    <span class="pl-k">if</span> <span class="pl-s1">err</span> <span class="pl-c1">:=</span> <span class="pl-s1">app</span>.<span class="pl-en">Start</span>(); <span class="pl-s1">err</span> <span class="pl-c1">!=</span> <span class="pl-c1">nil</span> {
-        <span class="pl-s1">log</span>.<span class="pl-en">Fatal</span>(<span class="pl-s1">err</span>)
-    }
-}</pre><div class="zeroclipboard-container">
-    
-  </div></div>
-</li>
-<li>
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要初始化依赖项，请运行</font></font><code>go mod init myapp &amp;&amp; go mod tidy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
 </li>
 <li>
