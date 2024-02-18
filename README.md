@@ -38,41 +38,7 @@
 <li>
 <p dir="auto"><font style="vertical-align: inherit;"></font><code>main.go</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">创建一个新的项目目录，其中</font><font style="vertical-align: inherit;">包含以下文件：</font></font></p>
 
-package main
-
-import (
-    "log"
-    "net/http"
-
-    "github.com/labstack/echo/v5"
-    "github.com/pocketbase/pocketbase"
-    "github.com/pocketbase/pocketbase/apis"
-    "github.com/pocketbase/pocketbase/core"
-)
-
-func main() {
-    app := pocketbase.New()
-
-    app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
-        // add new "GET /hello" route to the app router (echo)
-        e.Router.AddRoute(echo.Route{
-            Method: http.MethodGet,
-            Path:   "/hello",
-            Handler: func(c echo.Context) error {
-                return c.String(200, "Hello world!")
-            },
-            Middlewares: []echo.MiddlewareFunc{
-                apis.ActivityLogger(app),
-            },
-        })
-
-        return nil
-    })
-
-    if err := app.Start(); err != nil {
-        log.Fatal(err)
-    }
-}
+ 
 <p dir="auto"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">要初始化依赖项，请运行</font></font><code>go mod init myapp &amp;&amp; go mod tidy</code><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">.</font></font></p>
 </li>
 <li>
